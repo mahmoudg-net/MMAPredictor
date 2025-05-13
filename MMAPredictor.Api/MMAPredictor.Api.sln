@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35828.75 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMAPredictor.Api", "MMAPredictor.Api.csproj", "{47F4EFB8-064B-4ECD-89BD-6FD0FD7D7AF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMAPredictor.DataAccess", "..\MMAPredictor.DataAccess\MMAPredictor.DataAccess.csproj", "{854B5070-28C5-4D8B-BD6E-DFCA9735BB6E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{47F4EFB8-064B-4ECD-89BD-6FD0FD7D7AF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47F4EFB8-064B-4ECD-89BD-6FD0FD7D7AF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47F4EFB8-064B-4ECD-89BD-6FD0FD7D7AF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47F4EFB8-064B-4ECD-89BD-6FD0FD7D7AF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{854B5070-28C5-4D8B-BD6E-DFCA9735BB6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{854B5070-28C5-4D8B-BD6E-DFCA9735BB6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{854B5070-28C5-4D8B-BD6E-DFCA9735BB6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{854B5070-28C5-4D8B-BD6E-DFCA9735BB6E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {983EEC92-59B7-4A54-9964-B0E81FBFB373}
+	EndGlobalSection
+EndGlobal
