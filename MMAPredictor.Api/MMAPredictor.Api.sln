@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35828.75 d17.13
+VisualStudioVersion = 17.13.35828.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMAPredictor.Api", "MMAPredictor.Api.csproj", "{47F4EFB8-064B-4ECD-89BD-6FD0FD7D7AF9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMAPredictor.DataAccess", "..\MMAPredictor.DataAccess\MMAPredictor.DataAccess.csproj", "{854B5070-28C5-4D8B-BD6E-DFCA9735BB6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMAPredictor.DataScrapper", "..\MMAPredictorDataScrapper\MMAPredictor.DataScrapper.csproj", "{93E4FC98-827D-423A-AD38-57EDC3F3265B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMAPredictor.Core", "..\MMAPredictor.Core\MMAPredictor.Core.csproj", "{8021B28E-9BBC-42A7-AC6D-F7B4C132007A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.MMAPredictor.DataScrapper", "..\Test.MMAPredictor.DataScrapper\Test.MMAPredictor.DataScrapper.csproj", "{6A955400-ECAD-43C7-9BB0-D93BCF388143}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{854B5070-28C5-4D8B-BD6E-DFCA9735BB6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{854B5070-28C5-4D8B-BD6E-DFCA9735BB6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{854B5070-28C5-4D8B-BD6E-DFCA9735BB6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93E4FC98-827D-423A-AD38-57EDC3F3265B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93E4FC98-827D-423A-AD38-57EDC3F3265B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93E4FC98-827D-423A-AD38-57EDC3F3265B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93E4FC98-827D-423A-AD38-57EDC3F3265B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8021B28E-9BBC-42A7-AC6D-F7B4C132007A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8021B28E-9BBC-42A7-AC6D-F7B4C132007A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8021B28E-9BBC-42A7-AC6D-F7B4C132007A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8021B28E-9BBC-42A7-AC6D-F7B4C132007A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A955400-ECAD-43C7-9BB0-D93BCF388143}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A955400-ECAD-43C7-9BB0-D93BCF388143}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A955400-ECAD-43C7-9BB0-D93BCF388143}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A955400-ECAD-43C7-9BB0-D93BCF388143}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
