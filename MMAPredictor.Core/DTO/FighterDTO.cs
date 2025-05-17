@@ -16,16 +16,17 @@ namespace MMAPredictor.Core.DTO
         public int NbWins { get; set; }
         public int NbLoss { get; set; }
         public int NbDraws { get; set; }
-        public int? Height { get; set; }
-        public int? Weight { get; set; }
-        public int? Reach { get; set; }
-        public float? StrikesLandedByMinute { get; set; }
-        public float? StrikesAccuracy { get; set; }
-        public float? StrikesAbsorbedByMinute { get; set; }
-        public float? StrikingDefenseAccuracy { get; set; }
-        public float? TakedownAverage { get; set; }
-        public float? TakedownAccuracy { get; set; }
-        public float? TakedownDefenseAccuracy { get; set; }
-        public float? SubmissionsAverage { get; set; }
+        public double? Height { get; set; }
+        public double? Weight { get; set; }
+        public double? Reach { get; set; }
+        public string? Stance { get; set; }
+        public double? StrikesLandedByMinute { get; set; }
+        public double? StrikesAccuracy { get; set; }
+        public double? StrikesAbsorbedByMinute { get; set; }
+        public double? StrikingDefenceAccuracy { get; set; }
+        public double? TakedownAverage { get; set; }
+        public double? TakedownAccuracy { get; set; }
+        public double? TakedownDefenceAccuracy { get; set; }
+        public double? SubmissionsAverage { get; set; }
     }
 }
