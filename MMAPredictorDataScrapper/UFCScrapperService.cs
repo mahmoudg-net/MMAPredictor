@@ -13,7 +13,7 @@ namespace MMAPredictor.DataScrapper
 {
     public class UFCScrapperService : IUFCScrapperService
     {
-        public async Task<FighterDTO?> ScrapFighterPageAsync(string url, string path)
+        public async Task<FighterDTO?> ScrapFighterPageAsync(string? url, string? path)
         {
             try
             {
@@ -150,9 +150,9 @@ namespace MMAPredictor.DataScrapper
                     var match = regexValue.Matches(value)[0];
                     var integer = int.Parse(match.Groups["integer"].Value);
                     var sDec = match.Groups["decimal"].Value;
-                    var dec = int.Parse(sDec);
-                    double res = integer + dec / (10 * sDec.Length);
-                    return res;
+                    var dec = decimal.Parse(sDec);
+                    decimal res = integer + dec / (decimal)Math.Pow(10, sDec.Length);
+                    return (double)res;
                 }
                 return null;
             }
@@ -168,28 +168,48 @@ namespace MMAPredictor.DataScrapper
                 return null;
             }
 
-            var nodeCollection = SelectListNodes(htmlDoc, "((//body/section[@class='b-statistics__section_details']//div[contains(@class, 'b-fight-details')]/div)[2]//div[contains(@class,'b-list__info-box-left')]/div//li");
+            var nodeCollection = SelectListNodes(htmlDoc, "(//body/section[@class='b-statistics__section_details']//div[contains(@class, 'b-fight-details')]/div)[2]//div[contains(@class,'b-list__info-box-left')]/div//li");
             foreach (var n in nodeCollection)
             {
                 if (n.StartsWith("SLpM:"))
                 {
                     var value = n.ToLower().Replace("slpm:", "");
-                    fighterDto.StrikesLandedByMinute = ExtractDecimalValue(value);
+                    fighterDto.StrikesLandedByMinute = ExtractDecimalValue(value.Trim(' ', '\n'));
                 }
-                else if (n.StartsWith("Str. Acc:"))
+                else if (n.StartsWith("Str. Acc.:"))
                 {
                     var value = n.ToLower().Replace("str. acc:", "");
                     fighterDto.StrikesAccuracy = ExtractPercentageValue(value);
                 }
-                if (n.StartsWith("SApM:"))
+                else if (n.StartsWith("SApM:"))
                 {
                     var value = n.ToLower().Replace("sapm:", "");
                     fighterDto.StrikesAbsorbedByMinute = ExtractDecimalValue(value);
                 }
-                else if (n.StartsWith("Str. Def: "))
+                else if (n.StartsWith("Str. Def:"))
                 {
                     var value = n.ToLower().Replace("str. def:", "");
                     fighterDto.StrikingDefenceAccuracy = ExtractPercentageValue(value);
+                }
+                else if (n.StartsWith("TD Avg.:"))
+                {
+                    var value = n.ToLower().Replace("td avg.:", "");
+                    fighterDto.TakedownAverage = ExtractDecimalValue(value);
+                }
+                else if (n.StartsWith("TD Acc.:"))
+                {
+                    var value = n.ToLower().Replace("td acc.:", "");
+                    fighterDto.TakedownAccuracy = ExtractPercentageValue(value);
+                }
+                else if (n.StartsWith("TD Def.:"))
+                {
+                    var value = n.ToLower().Replace("td def.:", "");
+                    fighterDto.TakedownDefenceAccuracy = ExtractPercentageValue(value);
+                }
+                else if (n.StartsWith("Sub. Avg.:"))
+                {
+                    var value = n.ToLower().Replace("sub. avg.:", "");
+                    fighterDto.SubmissionsAverage = ExtractDecimalValue(value);
                 }
             }
         }

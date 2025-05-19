@@ -24,7 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MMAPredictor.Core\MMAPredictor.Core.csproj" />
     <ProjectReference Include="..\MMAPredictor.DataAccess\MMAPredictor.DataAccess.csproj" />
+    <ProjectReference Include="..\MMAPredictorDataScrapper\MMAPredictor.DataScrapper.csproj" />
   </ItemGroup>
 
 </Project>

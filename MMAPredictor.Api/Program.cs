@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using MMAPredictor.Core.Mapping;
 using MMAPredictor.DataAccess;
+using MMAPredictor.DataScrapper;
 
 namespace MMAPredictor.Api
 {
@@ -16,6 +18,10 @@ namespace MMAPredictor.Api
             builder.Services.AddOpenApi();
 
             builder.Services.AddDbContext<MMAPredictorDbContext>(options => options.UseSqlite("Data Source=MMAPredictor.db"));
+
+            builder.Services.AddScoped<IUFCScrapperService, UFCScrapperService>();
+
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
 
             var app = builder.Build();
 

@@ -10,6 +10,6 @@ namespace MMAPredictor.DataScrapper
         /// <param name="url"></param>
         /// <param name="path"></param>
         /// <returns></returns>
-        public Task<FighterDTO?> ScrapFighterPageAsync(string url, string path);
+        public Task<FighterDTO?> ScrapFighterPageAsync(string? url, string? path);
     }
 }

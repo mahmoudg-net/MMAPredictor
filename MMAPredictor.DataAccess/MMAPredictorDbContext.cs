@@ -10,7 +10,7 @@ namespace MMAPredictor.DataAccess
             
         }
 
-        DbSet<Fighter> Fighters { get; set; }
+        public DbSet<Fighter> Fighters { get; set; }
         DbSet<Fight> Fights { get; set; }
         DbSet<FightResult> FightResults { get; set; }
         DbSet<FightRound> FightRounds { get; set; }
