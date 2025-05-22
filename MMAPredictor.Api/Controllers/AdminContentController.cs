@@ -32,13 +32,24 @@ namespace MMAPredictor.Api.Controllers
             
             if (fighter is not null)
             {
-                var figherEntity = _mapper.Map<Fighter>(fighter);
                 var existingFighter = await _dbContext.Fighters.FirstOrDefaultAsync(x => x.Name == fighter.Name);
                 if (existingFighter == null)
                 {
+                    var figherEntity = _mapper.Map<Fighter>(fighter);
                     await _dbContext.Fighters.AddAsync(figherEntity);
-                    return HttpStatusCode.Created;
+                    await _dbContext.SaveChangesAsync();
+                    return Created();
                 }
+                else
+                {
+                    _mapper.Map(fighter, existingFighter);
+                    await _dbContext.SaveChangesAsync();
+                    return Ok();
+                }
+            }
+            else
+            {
+                return UnprocessableEntity();
             }
         }
     }
