@@ -15,5 +15,12 @@ namespace MMAPredictor.DataAccess
         DbSet<FightResult> FightResults { get; set; }
         DbSet<FightRound> FightRounds { get; set; }
         DbSet<MmaEvent> MmaEvents { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Fighter>()
+                .HasIndex(f => f.Name)
+                .IsUnique();
+        }
     }
 }
