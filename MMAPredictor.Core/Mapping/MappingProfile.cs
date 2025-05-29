@@ -13,7 +13,9 @@ namespace MMAPredictor.Core.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<FighterDTO, Fighter>().ReverseMap();
+            CreateMap<Fighter, FighterDTO>()
+                .ReverseMap()
+                .ForMember(dto=> dto.Id, option=>option.Ignore());
         }
     }
 }

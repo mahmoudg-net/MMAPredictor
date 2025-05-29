@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMAPredictor.Core", "..\MMA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.MMAPredictor.DataScrapper", "..\Test.MMAPredictor.DataScrapper\Test.MMAPredictor.DataScrapper.csproj", "{6A955400-ECAD-43C7-9BB0-D93BCF388143}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMAPredictor.Services", "..\MMAPredictor.Services\MMAPredictor.Services.csproj", "{30617960-E1CE-4E44-8621-1F3161C8A8CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.MMAPredictor.DataAccess", "..\Test.MMAPredictor.DataAccess\Test.MMAPredictor.DataAccess.csproj", "{C3AA39A5-78EC-4957-9B04-6F2DAF4143A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{6A955400-ECAD-43C7-9BB0-D93BCF388143}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A955400-ECAD-43C7-9BB0-D93BCF388143}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A955400-ECAD-43C7-9BB0-D93BCF388143}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30617960-E1CE-4E44-8621-1F3161C8A8CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30617960-E1CE-4E44-8621-1F3161C8A8CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30617960-E1CE-4E44-8621-1F3161C8A8CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30617960-E1CE-4E44-8621-1F3161C8A8CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3AA39A5-78EC-4957-9B04-6F2DAF4143A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3AA39A5-78EC-4957-9B04-6F2DAF4143A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3AA39A5-78EC-4957-9B04-6F2DAF4143A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3AA39A5-78EC-4957-9B04-6F2DAF4143A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

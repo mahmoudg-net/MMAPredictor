@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using MMAPredictor.Core.DTO;
+using MMAPredictor.Core.ProcessingResult;
 using MMAPredictor.DataAccess;
 using MMAPredictor.DataAccess.Entities;
 using MMAPredictor.DataScrapper;
+using MMAPredictor.Services;
 using System.Net;
 
 namespace MMAPredictor.Api.Controllers
@@ -15,42 +18,32 @@ namespace MMAPredictor.Api.Controllers
     [ApiController]
     public class AdminContentController : ControllerBase
     {
-        private readonly IUFCScrapperService _scrappingService;
-        private readonly IMapper _mapper;
-        private readonly MMAPredictorDbContext _dbContext;
-        public AdminContentController(IUFCScrapperService scrappingService ,IMapper mapper, MMAPredictorDbContext dbContext)
+        IFighterService _fighterService;
+        public AdminContentController(IFighterService fighterService)
         {
-            _scrappingService = scrappingService;
-            _mapper = mapper;
-            _dbContext = dbContext;
+            _fighterService = fighterService;
         }
 
         [HttpPost("/Fighters/Scrap")]
         public async Task<IActionResult> ScrapFighterURL([FromBody] string fighterURL)
         {
-            FighterDTO? fighter = await _scrappingService.ScrapFighterPageAsync(fighterURL, null);
-            
-            if (fighter is not null)
+            EntityProcessingResult<Fighter> processingResult = await _fighterService.UpsertFighterFromUrl(fighterURL);
+            switch(processingResult.Status)
             {
-                var existingFighter = await _dbContext.Fighters.FirstOrDefaultAsync(x => x.Name == fighter.Name);
-                if (existingFighter == null)
-                {
-                    var figherEntity = _mapper.Map<Fighter>(fighter);
-                    await _dbContext.Fighters.AddAsync(figherEntity);
-                    await _dbContext.SaveChangesAsync();
-                    return Created();
-                }
-                else
-                {
-                    _mapper.Map(fighter, existingFighter);
-                    await _dbContext.SaveChangesAsync();
-                    return Ok();
-                }
+                case ProcessingStatus.BadInput:
+                    return BadRequest();
+                case ProcessingStatus.NotFound:
+                    return UnprocessableEntity();
+                case ProcessingStatus.Created:
+                    return CreatedAtAction("Fighters/Scrap", processingResult.Entity);
+                case ProcessingStatus.Updated:
+                    return Ok(processingResult.Entity);
+                case ProcessingStatus.Exception:
+                    return Problem(detail: processingResult.Message);
+                default:
+                    return null;
             }
-            else
-            {
-                return UnprocessableEntity();
-            }
+
         }
     }
 }
