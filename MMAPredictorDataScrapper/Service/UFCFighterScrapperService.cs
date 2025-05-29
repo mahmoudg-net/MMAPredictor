@@ -8,10 +8,12 @@ using System.IO;
 using HtmlAgilityPack;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using MMAPredictor.DataScrapper.Interface;
+using MMAPredictor.DataScrapper.Utilities;
 
-namespace MMAPredictor.DataScrapper
+namespace MMAPredictor.DataScrapper.Service
 {
-    public class UFCScrapperService : IUFCScrapperService
+    public class UFCFighterScrapperService : IUFCFighterScrapperService
     {
         public async Task<FighterDTO?> ScrapFighterPageAsync(string? url, string? path)
         {
@@ -54,7 +56,7 @@ namespace MMAPredictor.DataScrapper
             { 
                 return null; 
             }
-            string? fighterName = SelectNode<string>(htmlDoc, "//body/section[@class='b-statistics__section_details']//span[@class='b-content__title-highlight']");
+            string? fighterName = ScrappingUtils.SelectNode<string>(htmlDoc, "//body/section[@class='b-statistics__section_details']//span[@class='b-content__title-highlight']");
             if (!string.IsNullOrEmpty(fighterName))
             {
                 return new FighterDTO()
@@ -67,7 +69,7 @@ namespace MMAPredictor.DataScrapper
 
         private bool FillFighterRecord(HtmlDocument htmlDoc, FighterDTO fighterDto)
         {
-            string? record = SelectNode<string>(htmlDoc, "//body/section[@class='b-statistics__section_details']//span[@class='b-content__title-record']");
+            string? record = ScrappingUtils.SelectNode<string>(htmlDoc, "//body/section[@class='b-statistics__section_details']//span[@class='b-content__title-record']");
             if (!string.IsNullOrEmpty(record))
             {
                 Regex recordRegex = new Regex("^record:\\s+(?<wins>\\d+)-(?<losses>\\d+)-(?<draws>\\d+)", RegexOptions.IgnoreCase);
@@ -86,7 +88,7 @@ namespace MMAPredictor.DataScrapper
 
         private void FillFighterPhysique(HtmlDocument htmlDoc, FighterDTO fighterDto)
         {
-            var nodeCollection = SelectListNodes(htmlDoc, "(//body/section[@class='b-statistics__section_details']//div[contains(@class, 'b-fight-details')]/div)[1]//li");
+            var nodeCollection = ScrappingUtils.SelectListNodes(htmlDoc, "(//body/section[@class='b-statistics__section_details']//div[contains(@class, 'b-fight-details')]/div)[1]//li");
             foreach(var n in nodeCollection)
             {
                 if (n.StartsWith("HEIGHT:", StringComparison.InvariantCultureIgnoreCase))
@@ -168,7 +170,7 @@ namespace MMAPredictor.DataScrapper
                 return null;
             }
 
-            var nodeCollection = SelectListNodes(htmlDoc, "(//body/section[@class='b-statistics__section_details']//div[contains(@class, 'b-fight-details')]/div)[2]//div[contains(@class,'b-list__info-box-left')]/div//li");
+            var nodeCollection = ScrappingUtils.SelectListNodes(htmlDoc, "(//body/section[@class='b-statistics__section_details']//div[contains(@class, 'b-fight-details')]/div)[2]//div[contains(@class,'b-list__info-box-left')]/div//li");
             foreach (var n in nodeCollection)
             {
                 if (n.StartsWith("SLpM:"))
@@ -212,56 +214,6 @@ namespace MMAPredictor.DataScrapper
                     fighterDto.SubmissionsAverage = ExtractDecimalValue(value);
                 }
             }
-        }
-
-        private T? SelectNode<T>(HtmlDocument htmlDoc, string xPath) where T : class
-        {
-            var node = htmlDoc.DocumentNode.SelectSingleNode(xPath);
-            string? text = null;
-            if (node != null)
-            {
-                text = node.InnerText?.Trim('\n', ' ');
-                return text as T;
-            }
-            return null;
-        }
-
-        private IEnumerable<string> SelectListNodes(HtmlDocument htmlDoc, string xPath)
-        {
-            HtmlNodeCollection? nodeList = htmlDoc.DocumentNode.SelectNodes(xPath);
-            if (nodeList != null)
-            {
-                foreach(var node in nodeList)
-                {
-                    yield return node.InnerText.Trim();
-                }
-            }            
-        }
-
-        public async Task<bool> SaveUrlToFile(string url, string path)
-        {
-            try
-            {
-                if (File.Exists(path))
-                {
-                    return true;
-                }
-
-                HtmlWeb web = new HtmlWeb();
-                var htmlDoc = await web.LoadFromWebAsync(url);
-                using Stream streamWriter = File.OpenWrite(path);
-                htmlDoc.Save(streamWriter);
-
-                if (!File.Exists(path))
-                {
-                    return false;
-                }
-                return new FileInfo(path).Length > 0;
-            }
-            catch
-            {
-                return false;
-            }
-        }
+        }        
     }
 }

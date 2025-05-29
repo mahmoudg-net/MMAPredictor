@@ -4,7 +4,7 @@ using MMAPredictor.Core.DTO;
 using MMAPredictor.Core.ProcessingResult;
 using MMAPredictor.DataAccess;
 using MMAPredictor.DataAccess.Entities;
-using MMAPredictor.DataScrapper;
+using MMAPredictor.DataScrapper.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +17,9 @@ namespace MMAPredictor.Services
     {
         private readonly MMAPredictorDbContext _dbContext;
         private readonly IMapper _mapper;
-        private readonly IUFCScrapperService _scrappingService;
+        private readonly IUFCFighterScrapperService _scrappingService;
 
-        public FighterService(IUFCScrapperService scrappingService, IMapper mapper, MMAPredictorDbContext dbContext)
+        public FighterService(IUFCFighterScrapperService scrappingService, IMapper mapper, MMAPredictorDbContext dbContext)
         {
             _scrappingService = scrappingService;
             _mapper = mapper;
@@ -41,7 +41,7 @@ namespace MMAPredictor.Services
                     return EntityProcessingResult<Fighter>.NotFound("Error when scrapping the fighter info from the provided URL");
                 }
 
-                Fighter? existingFighter = await _dbContext.Fighters.FirstOrDefaultAsync(f => f.Name.ToLowerInvariant() == fighterDto.Name.ToLowerInvariant()   );
+                Fighter? existingFighter = await _dbContext.Fighters.FirstOrDefaultAsync(f => f.Name.ToLower() == fighterDto.Name.ToLower()   );
                 if (existingFighter is null)
                 {
                     Fighter fighter = _mapper.Map<Fighter>(fighterDto);

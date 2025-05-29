@@ -1,8 +1,8 @@
 ﻿using MMAPredictor.Core.DTO;
 
-namespace MMAPredictor.DataScrapper
+namespace MMAPredictor.DataScrapper.Interface
 {
-    public interface IUFCScrapperService
+    public interface IUFCFighterScrapperService
     {
         /// <summary>
         /// If the path to a local file is provided, it will be given priority vs the url
